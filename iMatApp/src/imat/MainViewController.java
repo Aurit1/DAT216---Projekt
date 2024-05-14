@@ -19,7 +19,11 @@ public class MainViewController implements Initializable {
     Label pathLabel;
     @FXML
     AnchorPane MainHeader;
+    @FXML
     ImageView headerCart;
+    @FXML
+    ImageView headerLogo;
+
 
     IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
 
@@ -34,7 +38,21 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void MouseCartEnter(){
-        headerCart.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
-                "logo_hover.png")));
+        headerCart.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/Property 1=Hover.png")));
+    }
+
+    @FXML
+    public void MouseCartExit(){
+        headerCart.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/Property 1=Checkout.png")));
+    }
+
+    @FXML
+    public void MouseLogoEnter(){
+        headerLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo_hover.png")));
+    }
+
+    @FXML
+    public void MouseLogoExit(){
+        headerLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo.png")));
     }
 }

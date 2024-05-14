@@ -6,19 +6,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" onMouseEntered="#MouseCartEnter" prefHeight="700.0" prefWidth="1000.0" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
+<AnchorPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
    <children>
       <Label layoutX="306.0" layoutY="147.0" prefHeight="17.0" prefWidth="389.0" text="Sökväg till mappen där programmet hämtar och sparar data:" />
       <Label fx:id="pathLabel" alignment="CENTER" layoutX="115.0" layoutY="191.0" prefHeight="17.0" prefWidth="771.0" styleClass="text-sample" text="Label" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="114.33333333333337" />
       <AnchorPane fx:id="headerMain" minHeight="60.0" prefHeight="93.0" prefWidth="1000.0" styleClass="headerMain">
          <children>
-            <ImageView fx:id="headerLogo" fitHeight="150.0" fitWidth="150.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true" styleClass="HeaderLogo" AnchorPane.bottomAnchor="4.2775115966796875" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0">
+            <ImageView fx:id="headerLogo" fitHeight="150.0" fitWidth="150.0" layoutX="8.0" onMouseEntered="#MouseLogoEnter" onMouseExited="#MouseLogoExit" pickOnBounds="true" preserveRatio="true" styleClass="HeaderLogo" AnchorPane.bottomAnchor="4.2775115966796875" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0">
                <image>
                   <Image url="@resources/figma/logo.png" />
                </image>
             </ImageView>
             <TextField fx:id="headerSearchBar" layoutX="326.0" layoutY="28.0" prefHeight="37.0" prefWidth="347.0" styleClass="searchBar" />
-            <ImageView fx:id="headerCart" fitHeight="62.0" fitWidth="105.0" layoutX="891.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="headerCart" fitHeight="62.0" fitWidth="105.0" layoutX="891.0" layoutY="16.0" onMouseEntered="#MouseCartEnter" onMouseExited="#MouseCartExit" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/figma/Property%201=Checkout.png" />
                </image>
