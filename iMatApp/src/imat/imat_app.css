@@ -38,3 +38,21 @@
     -fx-background-color: #EF233C;
     -fx-background-insets: 0;
 }
+
+.sidebarButton {
+    -fx-background-color: #EF233C;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+
+    -fx-border-style: solid solid solid solid;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: #D90429;
+}
+
+.anchorBackground {
+    -fx-background-color: #f8fafb;
+}

@@ -6,3 +6,7 @@ EDF2F4 | Accordion Background color
 D90429 | Accordion Border color
 
 2B2D42 | Hover color (Dark blue)
+
+d7dbdd | fooditem background color
+
+f8fafb | main background white

@@ -8,11 +8,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1007.0" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
+<AnchorPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1007.0" styleClass="anchorBackground" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
    <children>
-      <Label layoutX="306.0" layoutY="147.0" prefHeight="17.0" prefWidth="389.0" text="Sökväg till mappen där programmet hämtar och sparar data:" />
-      <Label fx:id="pathLabel" alignment="CENTER" layoutX="115.0" layoutY="191.0" prefHeight="17.0" prefWidth="771.0" styleClass="text-sample" text="Label" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="114.33333333333337" />
+      <Label layoutX="421.0" layoutY="139.0" prefHeight="17.0" prefWidth="389.0" text="Sökväg till mappen där programmet hämtar och sparar data:" />
+      <Label fx:id="pathLabel" alignment="CENTER" layoutX="230.0" layoutY="183.0" prefHeight="17.0" prefWidth="771.0" styleClass="text-sample" text="Label" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" />
       <AnchorPane fx:id="headerMain" minHeight="60.0" prefHeight="93.0" prefWidth="1000.0" styleClass="headerMain">
          <children>
             <ImageView fx:id="headerLogo" fitHeight="150.0" fitWidth="150.0" layoutX="8.0" onMouseEntered="#MouseLogoEnter" onMouseExited="#MouseLogoExit" pickOnBounds="true" preserveRatio="true" styleClass="HeaderLogo" AnchorPane.bottomAnchor="4.2775115966796875" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0">
@@ -36,21 +37,21 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="199.0" styleClass="accordionBackground">
                            <children>
-                              <Button layoutY="-2.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" text="Baljväxter" />
-                              <Button layoutY="29.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" text="Bär" />
-                              <Button layoutY="60.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" text="Grönsaker" />
-                              <Button layoutY="91.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" text="Kål" />
-                              <Button layoutY="122.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" text="Meloner" />
-                              <Button layoutY="153.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="201.0" text="Nötter och frön" />
-                              <Button layoutY="186.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="201.0" text="Rotfrukter" />
-                              <Button layoutX="-1.0" layoutY="217.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" text="ÖrtKryddor" />
-                              <TitledPane animated="false" layoutX="-1.0" layoutY="248.0" prefHeight="197.0" prefWidth="202.0" text="Frukter">
+                              <Button layoutX="-2.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Baljväxter" />
+                              <Button layoutX="-2.0" layoutY="29.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Bär" />
+                              <Button layoutX="-2.0" layoutY="60.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Grönsaker" />
+                              <Button layoutX="-2.0" layoutY="91.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Kål" />
+                              <Button layoutX="-2.0" layoutY="122.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Meloner" />
+                              <Button layoutX="-2.0" layoutY="153.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Nötter och frön" />
+                              <Button layoutX="-2.0" layoutY="184.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Rotfrukter" />
+                              <Button layoutX="-2.0" layoutY="215.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="ÖrtKryddor" />
+                              <TitledPane animated="false" layoutX="-2.0" layoutY="246.0" prefHeight="197.0" prefWidth="202.0" styleClass="accordionTitlePane" text="Frukter">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="200.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="200.0" styleClass="accordionBackground">
                                        <children>
-                                          <Button layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" text="Exotiska frukter" />
-                                          <Button layoutX="-1.0" layoutY="29.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="201.0" text="Stenfrukter" />
-                                          <Button layoutY="60.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="201.0" text="Citrusfrukter" />
+                                          <Button layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Exotiska frukter" />
+                                          <Button layoutX="-1.0" layoutY="29.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Stenfrukter" />
+                                          <Button layoutX="-1.0" layoutY="60.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Citrusfrukter" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -76,9 +77,10 @@
                   </TitledPane>
               </panes>
             </Accordion>
-            <Button layoutX="-1.0" layoutY="573.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="202.0" text="Button" AnchorPane.bottomAnchor="-0.0" />
-            <Button layoutY="538.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="201.0" text="Button" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutX="-1.0" layoutY="572.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="202.0" styleClass="sidebarButton" text="Button" AnchorPane.bottomAnchor="0.6666666666666288" />
+            <Button layoutX="-1.0" layoutY="538.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="201.0" styleClass="sidebarButton" text="Button" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" />
          </children>
       </AnchorPane>
+      <FlowPane fx:id="mainFlowPane" hgap="10.0" layoutX="245.0" layoutY="256.0" prefHeight="430.0" prefWidth="725.0" vgap="15.0" />
    </children>
 </AnchorPane>
