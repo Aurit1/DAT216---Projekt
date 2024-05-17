@@ -5,7 +5,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <fx:root prefHeight="232.0" prefWidth="172.0" styleClass="fooditem_background" stylesheets="@imat_fooditem.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="itemImage" fitHeight="100.0" fitWidth="100.0" layoutX="36.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="36.0">
@@ -18,11 +17,6 @@
       <Label fx:id="ItemDiff" layoutX="73.0" layoutY="139.0" text="33kr/kg" />
       <AnchorPane layoutX="28.0" layoutY="167.0" maxHeight="33.0" maxWidth="100.0" minHeight="33.0" minWidth="115.0" prefHeight="33.0" prefWidth="100.0">
          <children>
-            <ImageView fx:id="purchaseButton" fitHeight="33.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@resources/figma/köpknapp.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="33.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/figma/button_backgroundborder.png" />
@@ -37,6 +31,11 @@
             <ImageView fx:id="addButton" fitHeight="33.0" fitWidth="41.0" layoutX="76.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/figma/plus_button.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="purchaseButton" fitHeight="33.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/figma/köpknapp.png" />
                </image>
             </ImageView>
          </children>
