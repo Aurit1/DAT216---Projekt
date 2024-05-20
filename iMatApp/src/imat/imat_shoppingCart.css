@@ -1,0 +1,25 @@
+.cart_background {
+    -fx-border-radius: 20 0 0 20;
+    -fx-background-radius: 20 0 0 20;
+    -fx-background-color: #fefeff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.cartitem_background {
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0.0, 0.0);
+}
+
+.ammount_text {
+    -fx-font-size: 16px;
+}
+
+.product_name {
+    -fx-font-size: 18px;
+}
+
+.product_price {
+    -fx-font-size: 17px;
+}

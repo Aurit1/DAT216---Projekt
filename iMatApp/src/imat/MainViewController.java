@@ -2,56 +2,74 @@
 package imat;
 
 import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import com.sun.tools.javac.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.PopupWindow;
-import se.chalmers.cse.dat216.project.IMatDataHandler;
-import se.chalmers.cse.dat216.project.Product;
+import se.chalmers.cse.dat216.project.*;
 
 public class MainViewController implements Initializable {
 
     private Map<String, IMatFoodItem> iMatFoodItemMap = new HashMap<String, IMatFoodItem>();
+    private Map<String, IMatCartItem> iMatCartItemMap = new HashMap<String, IMatCartItem>();
+    private Hashtable<String, ProductCategory> categoryDict = new Hashtable<>();
+    private String searchWord;
+    @FXML
+    private Label pathLabel;
+    @FXML
+    private AnchorPane mainHeader;
+    @FXML
+    private ImageView headerCart;
+    @FXML
+    private ImageView headerLogo;
+    @FXML
+    private FlowPane mainFlowPane;
+    @FXML
+    private TextField headerSearchBar;
 
     @FXML
-    Label pathLabel;
+    private FlowPane cartFlowPane;
     @FXML
-    AnchorPane mainHeader;
-    @FXML
-    ImageView headerCart;
-    @FXML
-    ImageView headerLogo;
-    @FXML
-    FlowPane mainFlowPane;
+    private AnchorPane cartPane;
 
+    private int quantLabelValue;
+    private IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
+    private ProductCategory currentProductCategory;
 
-
-
-    IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
+    public ShoppingCart shoppingCart;
 
     public void initialize(URL url, ResourceBundle rb) {
 
         String iMatDirectory = iMatDataHandler.imatDirectory();
+        shoppingCart = IMatDataHandler.getInstance().getShoppingCart();
 
         pathLabel.setText(iMatDirectory);
-
 
         for (Product product : iMatDataHandler.getProducts()) {
             IMatFoodItem foodItem = new IMatFoodItem(product, this);
             iMatFoodItemMap.put(product.getName(), foodItem);
         }
 
-        updateItemList();
-    }
+        for (Product product : iMatDataHandler.getProducts()) {
+            IMatCartItem cartItem = new IMatCartItem(product, this);
+            iMatCartItemMap.put(product.getName(), cartItem);
+        }
 
+        updateItemList();
+        //updateItemListCategory();
+        populateDic();
+        updateShoppingCart();
+    }
 
     @FXML
     public void MouseCartEnter(){
@@ -83,10 +101,94 @@ public class MainViewController implements Initializable {
           IMatFoodItem foodItem = iMatFoodItemMap.get(product.getName());
           mainFlowPane.getChildren().add(foodItem);
       }
+
+      headerSearchBar.setPromptText("Sök i alla kategorier...");
     }
 
-   // recipeContainer.getChildren().clear();
-     //   for(Recipe var : bgController.getRecipes()){
-       // RecipeListItem RLI = recipeListItemMap.get(var.getName());
-        //recipeContainer.getChildren().add(RLI);
+    private void populateDic() {
+        categoryDict.put("Baljväxter", ProductCategory.POD);
+        categoryDict.put("Bär", ProductCategory.BERRY);
+        categoryDict.put("Grönsaker", ProductCategory.VEGETABLE_FRUIT);
+        categoryDict.put("Kål", ProductCategory.CABBAGE);
+        categoryDict.put("Meloner", ProductCategory.MELONS);
+        categoryDict.put("Rotfrukter", ProductCategory.ROOT_VEGETABLE);
+        categoryDict.put("Örtkryddor", ProductCategory.HERB);
+        categoryDict.put("Exotiska frukter", ProductCategory.EXOTIC_FRUIT);
+        categoryDict.put("Stenfrukter", ProductCategory.FRUIT);
+        categoryDict.put("Citrusfrukter", ProductCategory.CITRUS_FRUIT);
+        categoryDict.put("Kött", ProductCategory.MEAT);
+        categoryDict.put("Fisk", ProductCategory.FISH);
+        categoryDict.put("Bröd", ProductCategory.BREAD);
+        categoryDict.put("Mejeriprodukter", ProductCategory.DAIRIES);
+        categoryDict.put("Mjöl,Socker,Salt", ProductCategory.FLOUR_SUGAR_SALT);
+        categoryDict.put("Nötter och frön", ProductCategory.NUTS_AND_SEEDS);
+        categoryDict.put("Pasta", ProductCategory.PASTA);
+        categoryDict.put("Potatis och ris", ProductCategory.POTATO_RICE);
+        categoryDict.put("Drycker Varma", ProductCategory.HOT_DRINKS);
+        categoryDict.put("Drycker Kalla", ProductCategory.COLD_DRINKS);
+        categoryDict.put("Sötsaker", ProductCategory.SWEET);
+    }
+
+    @FXML
+    private void updateItemListCategory() {
+        List<Product> products = iMatDataHandler.getProducts(currentProductCategory);
+
+        mainFlowPane.getChildren().clear();
+        for(Product product : products){
+            IMatFoodItem foodItem = iMatFoodItemMap.get(product.getName());
+            mainFlowPane.getChildren().add(foodItem);
+        }
+
+   //     for (String key : categoryDict.keySet()) {
+     //       if(categoryDict.get(key) == currentProductCategory){
+       //         headerSearchBar.setPromptText("Sök i " + key +  "...");
+         //   }
+        //}
+    }
+
+    @FXML
+    public void categoryButtonPressed(ActionEvent event) {
+        Button activeButton = (Button) event.getSource();
+
+        String category = activeButton.getText();
+        currentProductCategory = categoryDict.get(category);
+        updateItemListCategory();
+    }
+
+    @FXML
+    public void searchProducts() {
+        searchWord = headerSearchBar.getText();
+        System.out.println(searchWord);
+        mainFlowPane.getChildren().clear();
+        for(Product product : iMatDataHandler.findProducts(searchWord)) {
+            IMatFoodItem foodItem = iMatFoodItemMap.get(product.getName());
+            mainFlowPane.getChildren().add(foodItem);
+        }
+// 👍
+    }
+
+    @FXML
+    public void closeShoppingCartPreview() {
+        cartPane.toBack();
+        cartPane.setVisible(false);
+    }
+
+    @FXML
+    public void openShoppingCartPreview() {
+        updateShoppingCart();
+        cartPane.toFront();
+        cartPane.setVisible(true);
+    }
+
+    private void updateShoppingCart() {
+        List<ShoppingItem> items = iMatDataHandler.getShoppingCart().getItems();
+        cartFlowPane.getChildren().clear();
+
+        for(ShoppingItem item : items) {
+            IMatCartItem cartItem = iMatCartItemMap.get(item.getProduct().getName());
+            cartFlowPane.getChildren().add(cartItem);
+        }
+    }
+
 }
+
