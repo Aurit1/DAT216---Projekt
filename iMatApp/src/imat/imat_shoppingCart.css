@@ -3,6 +3,10 @@
     -fx-background-radius: 20 0 0 20;
     -fx-background-color: #fefeff;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+
+    -fx-border-style: solid solid solid solid;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #EDF2F4;
 }
 
 .cartitem_background {
@@ -14,12 +18,46 @@
 
 .ammount_text {
     -fx-font-size: 16px;
+    -fx-font-family: "Roboto";
 }
 
 .product_name {
-    -fx-font-size: 18px;
+    -fx-font-size: 17px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: Bold;
 }
 
 .product_price {
     -fx-font-size: 17px;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: bold;
 }
+
+.plusminus_background {
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #EDF2F4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0.5, 0.0, 0.0);
+}
+
+.toCheckOut_button {
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #EF233C;
+    -fx-text-fill: #EDF2F4;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: Bold;
+
+
+    -fx-border-style: solid solid solid solid;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #D90429;
+}
+
+
+.price_label {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 22;
+    -fx-font-weight: Bold;
+}
+

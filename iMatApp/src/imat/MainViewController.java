@@ -6,6 +6,7 @@ import java.util.*;
 
 import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -33,6 +34,8 @@ public class MainViewController implements Initializable {
     @FXML
     private ImageView headerLogo;
     @FXML
+    private ImageView headerLogo_checkoutView;
+    @FXML
     private FlowPane mainFlowPane;
     @FXML
     private TextField headerSearchBar;
@@ -42,11 +45,51 @@ public class MainViewController implements Initializable {
     @FXML
     private AnchorPane cartPane;
 
+    @FXML
+    private AnchorPane checkoutAnchorPane;
+    @FXML
+    private FlowPane checkoutFlowPane;
+    @FXML
+    private Label errorLabel;
+
+    //KASSA
+    @FXML
+    private TextField firstNameTextField;
+    @FXML
+    private TextField surnameTextField;
+    @FXML
+    private TextField mailTextField;
+    @FXML
+    private TextField adressTextField;
+    @FXML
+    private TextField cardTextField;
+    @FXML
+    private TextField csvTextField;
+    @FXML
+    private TextField expirationMonthTextField;
+    @FXML
+    private TextField expirationYearTextField;
+    @FXML
+    private TextField phoneTextField;
+    @FXML
+    private TextField postalTextField;
+    @FXML
+    private Button orderButton;
+    @FXML
+    private FlowPane detailPane;
+
     private int quantLabelValue;
     private IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
     private ProductCategory currentProductCategory;
 
     public ShoppingCart shoppingCart;
+    public Customer customer;
+    public CreditCard creditCard;
+
+    public List<Order> orderList = new ArrayList<>();
+
+    private List<IMatFoodItem> foodItemList = new ArrayList<IMatFoodItem>();
+    private List<IMatCartItem> cartItemList = new ArrayList<IMatCartItem>();
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -69,6 +112,9 @@ public class MainViewController implements Initializable {
         //updateItemListCategory();
         populateDic();
         updateShoppingCart();
+
+        customer = iMatDataHandler.getCustomer();
+        creditCard = iMatDataHandler.getCreditCard();
     }
 
     @FXML
@@ -84,23 +130,27 @@ public class MainViewController implements Initializable {
     @FXML
     public void MouseLogoEnter(){
         headerLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo_hover.png")));
+        headerLogo_checkoutView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo_hover.png")));
     }
 
     @FXML
     public void MouseLogoExit(){
         headerLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo.png")));
+        headerLogo_checkoutView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo.png")));
     }
 
     @FXML
     private void updateItemList() {
+        List<Product> products = iMatDataHandler.getProducts();
 
-      List<Product> products = iMatDataHandler.getProducts();
+        System.out.println("jiodsfhjl");
 
-      mainFlowPane.getChildren().clear();
-      for(Product product : products){
-          IMatFoodItem foodItem = iMatFoodItemMap.get(product.getName());
-          mainFlowPane.getChildren().add(foodItem);
-      }
+        mainFlowPane.getChildren().clear();
+        for(Product product : products){
+            IMatFoodItem foodItem = iMatFoodItemMap.get(product.getName());
+            mainFlowPane.getChildren().add(foodItem);
+            foodItemList.add(foodItem);
+        }
 
       headerSearchBar.setPromptText("Sök i alla kategorier...");
     }
@@ -153,6 +203,7 @@ public class MainViewController implements Initializable {
         String category = activeButton.getText();
         currentProductCategory = categoryDict.get(category);
         updateItemListCategory();
+        IMatDataHandler.getInstance().shutDown();
     }
 
     @FXML
@@ -164,7 +215,6 @@ public class MainViewController implements Initializable {
             IMatFoodItem foodItem = iMatFoodItemMap.get(product.getName());
             mainFlowPane.getChildren().add(foodItem);
         }
-// 👍
     }
 
     @FXML
@@ -187,6 +237,111 @@ public class MainViewController implements Initializable {
         for(ShoppingItem item : items) {
             IMatCartItem cartItem = iMatCartItemMap.get(item.getProduct().getName());
             cartFlowPane.getChildren().add(cartItem);
+            cartItem.updateQuantLabel();
+        }
+    }
+
+    @FXML
+    public void MouseTrap(Event event) {
+        event.consume();
+    }
+
+    @FXML
+    public void BackToMainView() {
+        updateItemList();
+
+        checkoutAnchorPane.toBack();
+        checkoutAnchorPane.setVisible(false);
+        checkoutFlowPane.getChildren().clear();
+    }
+
+    @FXML
+    public void OpenCheckoutView() {PopulateCheckoutFlowPane();
+        checkoutAnchorPane.toFront();
+        checkoutAnchorPane.setVisible(true);
+        cartPane.toBack();
+        cartPane.setVisible(false);
+        orderButton.setText("Skicka beställning");
+
+
+        mainFlowPane.getChildren().clear();
+    }
+
+    private void PopulateCheckoutFlowPane() {
+        List<ShoppingItem> items = iMatDataHandler.getShoppingCart().getItems();
+        checkoutFlowPane.getChildren().clear();
+
+        for(ShoppingItem item : items) {
+            IMatCartItem cartItem = iMatCartItemMap.get(item.getProduct().getName());
+            checkoutFlowPane.getChildren().add(cartItem);
+            cartItemList.add(cartItem);
+        }
+    }
+
+
+    @FXML
+    public void OpenProductDetailView(Product product) {
+        detailPane.toFront();
+        detailPane.setVisible(true);
+        detailPane.getChildren().add(new imat_detail(product, this));
+
+    }
+
+    @FXML
+    public void closeDetailView() {
+        detailPane.getChildren().clear();
+        detailPane.setVisible(false);
+        detailPane.toBack();
+    }
+
+
+    @FXML
+    public void placeOrder() {
+
+
+
+        try {
+            customer.setAddress(adressTextField.getText());
+            customer.setEmail(mailTextField.getText());
+            customer.setFirstName(firstNameTextField.getText());
+            customer.setLastName(surnameTextField.getText());
+            customer.setPhoneNumber(phoneTextField.getText());
+            customer.setPostCode(postalTextField.getText());
+            customer.setPostAddress(adressTextField.getText());
+
+            creditCard.setCardNumber(cardTextField.getText());
+            creditCard.setHoldersName(firstNameTextField.getText() + surnameTextField.getText());
+            creditCard.setVerificationCode(Integer.parseInt(csvTextField.getText()));
+            creditCard.setValidYear(Integer.parseInt(expirationYearTextField.getText()));
+            creditCard.setValidMonth(Integer.parseInt(expirationMonthTextField.getText()));
+
+            if(iMatDataHandler.isCustomerComplete()) {
+                errorLabel.setVisible(false);
+                iMatDataHandler.placeOrder();
+
+                shoppingCart.clear();
+                updateQuantLabels();
+                iMatDataHandler.shutDown();
+                orderButton.setText("Skickat");
+            }
+            else {
+                System.out.println("Order is not complete");
+            }
+        } catch (Exception e) {
+            errorLabel.setVisible(true);
+        }
+
+        //orderList.add()
+    }
+
+    protected void updateQuantLabels() {
+        System.out.println("hahaheheh");
+
+        for(IMatFoodItem item: foodItemList) {
+            item.updateQuantLabel();
+        }
+        for(IMatCartItem item: cartItemList) {
+            item.updateQuantLabel();
         }
     }
 

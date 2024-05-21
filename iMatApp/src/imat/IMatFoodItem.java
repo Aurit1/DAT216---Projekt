@@ -1,6 +1,7 @@
 package imat;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -38,6 +39,9 @@ public class IMatFoodItem extends AnchorPane {
     ImageView subButton;
     @FXML
     ImageView addButton;
+
+    @FXML
+    private AnchorPane foodPane;
 
     ShoppingItem produktItem;
 
@@ -78,40 +82,38 @@ public class IMatFoodItem extends AnchorPane {
 
     //WIP
     @FXML
-    public void purchaseButtonPressed() {
+    public void purchaseButtonPressed(Event event) {
         purchaseButton.toBack();
         purchaseButton.setVisible(false);
 
+        addButtonPressed(event);
+
+        event.consume();
+    }
+
+    protected void updateQuantLabel(){
+        List<ShoppingItem> items = parentController.shoppingCart.getItems();
+        if (items.isEmpty()) {
+            quantLabel.setText("0");
+            purchaseButton.setVisible(true);
+            purchaseButton.toFront();
+        }
+        for(ShoppingItem item : items) {
+            if(product.getProductId() == item.getProduct().getProductId()) {
+                String ammountText = Integer.toString((int) item.getAmount());
+                quantLabel.setText(ammountText);
+                return;
+            }
+        }
+        quantLabel.setText("0");
+        purchaseButton.setVisible(true);
+        purchaseButton.toFront();
 
     }
 
     @FXML
-    private void updateQuantLabel(){
-        List<ShoppingItem> items = parentController.shoppingCart.getItems();
-        for(ShoppingItem item : items) {
-            if(product.getProductId() == item.getProduct().getProductId()) {
-                quantLabel.setText(Double.toString(item.getAmount()));
-            }
-        }
-
-    }
-
-    public void subButtonPressed(){
-        //parentController.shoppingCart.removeItem(produktItem);
-//        List<ShoppingItem> hehe = parentController.shoppingCart.getItems();
-//        if(hehe.isEmpty()) return;
-//        for(ShoppingItem item : hehe) {
-//            if(product.getClass() == item.getProduct().getClass()) {
-//                if(item.getAmount() > 1) {
-//                    double ammount = item.getAmount() - 1;
-//                    item.setAmount(ammount);
-//                }
-//                else{
-//                    parentController.shoppingCart.removeItem(item);
-//                    quantLabel.setText("0");
-//                }
-//            }
-//        }
+    public void subButtonPressed(Event event){
+        event.consume();
         var shoppingCart = IMatDataHandler.getInstance().getShoppingCart();
         var itemOptional = shoppingCart.getItems().stream().filter(x -> x.getProduct().getProductId() == product.getProductId()).findFirst();
         if (itemOptional.isEmpty())
@@ -119,20 +121,48 @@ public class IMatFoodItem extends AnchorPane {
         var item = itemOptional.get();
         if ((int)(item.getAmount()) == 1) {
             shoppingCart.removeItem(item);
-            quantLabel.setText("0");
+            purchaseButton.setVisible(true);
+            purchaseButton.toFront();
         }
         else {
             item.setAmount(item.getAmount() - 1);
             shoppingCart.fireShoppingCartChanged(item, false);
         }
 
-        updateQuantLabel();
+        parentController.updateQuantLabels();
+
     }
 
-    public void addButtonPressed(){
+    @FXML
+    public void addButtonPressed(Event event){
+        event.consume();
         parentController.shoppingCart.addProduct(product, true);
-        updateQuantLabel();
+        parentController.updateQuantLabels();
     }
 
+    @FXML
+    public void addButtonMouseEnter() {
+        addButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/plus_button_hover.png")));
+    }
 
+    @FXML
+    public void addButtonMouseExit() {
+        addButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/plus_button.png")));
+    }
+
+    @FXML
+    public void subButtonMouseEnter() {
+        subButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/minus_button_hover.png")));
+    }
+
+    @FXML
+    public void subButtonMouseExit() {
+        subButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/minus_button.png")));
+    }
+
+    @FXML
+    public void openProductDetailView() {
+        System.out.println("haha");
+        parentController.OpenProductDetailView(product);
+    }
 }

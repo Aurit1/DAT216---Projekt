@@ -1,0 +1,24 @@
+.checkout_smalltext {
+    -fx-font-size: 14px;
+    -fx-text-alignment: right;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: bold;
+}
+.textField {
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 13px;
+}
+.order_button {
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #EF233C;
+    -fx-text-fill: #EDF2F4;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: Bold;
+
+    -fx-border-style: solid solid solid solid;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #D90429;
+}

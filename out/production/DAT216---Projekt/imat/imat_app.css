@@ -32,6 +32,8 @@
     -fx-border-width: 0 0 3 0;
     -fx-border-color: #D90429;
 
+    -fx-arrow-side: right;
+
 }
 
 .accordionTitlePane > .title {
@@ -39,8 +41,13 @@
     -fx-background-insets: 0;
 }
 
+.accordionTitlePane > .title > .arrow-button .arrow {
+    -fx-background-color: grey;
+
+}
+
 .sidebarButton {
-    -fx-background-color: #EF233C;
+    -fx-background-color: #D90429;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 
@@ -59,4 +66,12 @@
 
 .fooditem-scrollpane {
     -fx-border-radius: 0 0 0 0;
+}
+
+.checkout-background {
+    -fx-background-color: #f8fafb;
+}
+
+.flowpane_background {
+    -fx-background-color: rgb(0, 0, 0, 0.4);
 }
