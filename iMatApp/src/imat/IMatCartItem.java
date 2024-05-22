@@ -35,7 +35,6 @@ public class IMatCartItem extends AnchorPane {
     @FXML
     private ImageView subButton;
 
-
     IMatDataHandler iMatDataHandler;
 
     public IMatCartItem(Product product, MainViewController mainViewController){
@@ -60,20 +59,26 @@ public class IMatCartItem extends AnchorPane {
     private void populateCartItem() {
         productImage.setImage(iMatDataHandler.getFXImage(product));
         productName.setText(product.getName());
-        productPrice.setText(Double.toString(product.getPrice()) + "kr/" + product.getUnit());
+        productPrice.setText(Double.toString(product.getPrice()) + product.getUnit());
         updateQuantLabel();
     }
 
 
-
+    public String getName() {
+        return product.getName();
+    }
 
 
     protected void updateQuantLabel(){
         List<ShoppingItem> items = parentController.shoppingCart.getItems();
+
         if (items.isEmpty()) {
+            System.out.println("No shopping cart items found");
             parentController.updateShoppingCart();
+            return;
         }
         for(ShoppingItem item : items) {
+            System.out.println(item.getProduct().getName());
             if(product.getProductId() == item.getProduct().getProductId()) {
                 String ammountText = Integer.toString((int) item.getAmount());
                 ammountLabel.setText(ammountText);
@@ -126,4 +131,12 @@ public class IMatCartItem extends AnchorPane {
     public void subButtonMouseExit() {
         subButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/minus_button.png")));
     }
+
+    @FXML
+    public void removeButton() {
+        iMatDataHandler.getShoppingCart().removeProduct(product);
+        parentController.updateQuantLabels();
+        parentController.updateShoppingCart();
+    }
+
 }

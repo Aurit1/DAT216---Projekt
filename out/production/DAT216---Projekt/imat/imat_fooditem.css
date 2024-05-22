@@ -3,7 +3,20 @@
     -fx-background-radius: 15 15 15 15;
     -fx-background-color: #fefeff;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.07), 10, 0.5, 0.0, 0.0);
-
-
-
 }
+
+.fooditem_background:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.24), 10, 0.5, 0.0, 0.0);
+}
+
+.product_text {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 17px;
+    -fx-font-weight: Bold;
+}
+
+.product_small_text {
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+}
+

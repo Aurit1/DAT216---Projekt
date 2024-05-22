@@ -15,6 +15,55 @@
 
 <AnchorPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1007.0" styleClass="anchorBackground" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
    <children>
+      <AnchorPane fx:id="receiptViewPane" prefHeight="200.0" prefWidth="200.0" styleClass="anchorBackground" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="headerMain2" minHeight="60.0" prefHeight="93.0" prefWidth="1000.0" styleClass="headerMain" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fx:id="headerLogo1" fitHeight="150.0" fitWidth="150.0" layoutX="8.0" onMouseEntered="#MouseLogoEnter" onMouseExited="#MouseLogoExit" onMouseReleased="#updateItemList" pickOnBounds="true" preserveRatio="true" styleClass="HeaderLogo" AnchorPane.bottomAnchor="4.2775115966796875" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="15.0">
+                     <image>
+                        <Image url="@resources/figma/logo.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="headerSearchBar2" layoutX="326.0" layoutY="28.0" onKeyTyped="#searchProducts" prefHeight="37.0" prefWidth="347.0" styleClass="searchBar" AnchorPane.bottomAnchor="25.999999999999993" AnchorPane.leftAnchor="326.0" AnchorPane.rightAnchor="326.0" AnchorPane.topAnchor="28.0" />
+                  <ImageView fx:id="headerCart1" fitHeight="62.0" fitWidth="105.0" layoutX="891.0" layoutY="16.0" onMouseEntered="#MouseCartEnter" onMouseExited="#MouseCartExit" onMousePressed="#openShoppingCartPreview" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.333333333333329" AnchorPane.rightAnchor="14.558135986328125" AnchorPane.topAnchor="16.0">
+                     <image>
+                        <Image url="@resources/figma/Property 1=Checkout.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane fx:id="cartNumberPane1" layoutX="883.0" layoutY="14.0" prefHeight="27.0" prefWidth="30.0" styleClass="cart_number_background" visible="false" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="14.0">
+                     <children>
+                        <Label fx:id="cartNumberLabel1" alignment="CENTER" layoutY="1.0" styleClass="cart_number" text="100" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <ScrollPane layoutX="64.0" layoutY="150.0" prefHeight="490.0" prefWidth="261.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="150.0">
+               <content>
+                  <FlowPane fx:id="receiptFlowPane" prefHeight="479.0" prefWidth="242.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cartPane" layoutX="575.3333333333334" onMouseReleased="#closeShoppingCartPreview" prefHeight="700.0" prefWidth="1015.0" stylesheets="@imat_shoppingCart.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane onMouseReleased="#MouseTrap" prefHeight="700.0" prefWidth="291.0" styleClass="cart_background" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ScrollPane layoutX="24.0" layoutY="116.0" prefHeight="493.0" prefWidth="245.0" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="116.0">
+                     <content>
+                        <FlowPane fx:id="cartFlowPane" alignment="TOP_CENTER" prefHeight="491.0" prefWidth="227.0" styleClass="mylistview" vgap="5.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </FlowPane>
+                     </content>
+                  </ScrollPane>
+                  <Button layoutX="91.0" layoutY="654.0" mnemonicParsing="false" onAction="#OpenCheckoutView" prefHeight="32.0" prefWidth="109.0" styleClass="toCheckOut_button" text="Öppna kassan" />
+                  <Button layoutX="95.0" layoutY="14.0" mnemonicParsing="false" styleClass="toCheckOut_button" text="Gamla kvitton" />
+                  <Label fx:id="totCostLabel" alignment="CENTER" layoutX="67.0" layoutY="616.0" prefHeight="17.0" prefWidth="159.0" styleClass="price_label" text="Total: 0kr" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="checkoutAnchorPane" prefHeight="200.0" prefWidth="200.0" styleClass="checkout-background" stylesheets="@imat_kassa.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane fx:id="headerMain1" minHeight="60.0" prefHeight="93.0" prefWidth="1000.0" styleClass="headerMain" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -27,7 +76,7 @@
                   <TextField fx:id="headerSearchBar1" layoutX="326.0" layoutY="28.0" onAction="#searchProducts" prefHeight="37.0" prefWidth="347.0" styleClass="searchBar" AnchorPane.bottomAnchor="25.999999999999993" AnchorPane.leftAnchor="326.0" AnchorPane.rightAnchor="326.0" AnchorPane.topAnchor="28.0" />
                </children>
             </AnchorPane>
-            <ScrollPane layoutX="93.0" layoutY="142.0" prefHeight="507.0" prefWidth="229.0">
+            <ScrollPane layoutX="93.0" layoutY="142.0" prefHeight="507.0" prefWidth="229.0" AnchorPane.bottomAnchor="50.666666666666686" AnchorPane.leftAnchor="93.0" AnchorPane.topAnchor="142.0">
                <content>
                   <FlowPane fx:id="checkoutFlowPane" prefHeight="489.0" prefWidth="191.0" vgap="5.0" />
                </content>
@@ -51,37 +100,23 @@
                   <Label layoutX="1.0" layoutY="199.0" styleClass="checkout_smalltext" text="CSV:" AnchorPane.leftAnchor="0.0" />
                   <TextField fx:id="csvTextField" layoutX="192.0" layoutY="196.0" prefHeight="25.0" prefWidth="41.0" promptText="XYZ" styleClass="textField" />
                   <Label layoutX="-1.0" layoutY="225.0" styleClass="checkout_smalltext" text="Expiration date MM/YY:" AnchorPane.leftAnchor="0.0" />
-                  <TextField fx:id="expirationMonthTextField" alignment="CENTER" layoutX="192.0" layoutY="223.0" prefHeight="25.0" prefWidth="40.0" promptText="MM" styleClass="textField" />
-                  <TextField fx:id="expirationYearTextField" alignment="CENTER" layoutX="248.0" layoutY="223.0" prefHeight="25.0" prefWidth="40.0" promptText="YY" styleClass="textField" />
-                  <Button fx:id="orderButton" layoutX="193.0" layoutY="261.0" mnemonicParsing="false" onAction="#placeOrder" styleClass="order_button" text="Skicka beställning" />
-                  <Label layoutX="237.0" layoutY="226.0" text="/" />
+                  <TextField fx:id="expirationMonthTextField" alignment="CENTER" layoutX="192.0" layoutY="224.0" prefHeight="25.0" prefWidth="40.0" promptText="MM" styleClass="textField" />
+                  <TextField fx:id="expirationYearTextField" alignment="CENTER" layoutX="248.0" layoutY="224.0" prefHeight="25.0" prefWidth="40.0" promptText="YY" styleClass="textField" />
+                  <Button fx:id="orderButton" layoutX="179.0" layoutY="311.0" mnemonicParsing="false" onAction="#placeOrder" styleClass="order_button" text="Skicka beställning" />
+                  <Label layoutX="237.0" layoutY="227.0" text="/" />
                   <Label fx:id="errorLabel" layoutX="121.0" layoutY="302.0" text="Snälla fyll i alla fält innan du skickar beställningen" visible="false" />
+                  <Label layoutX="-2.0" layoutY="250.0" styleClass="checkout_smalltext" text="Delivery date:" AnchorPane.leftAnchor="-2.0" />
+                  <TextField fx:id="expirationMonthTextField1" alignment="CENTER" layoutX="192.0" layoutY="252.0" prefHeight="25.0" prefWidth="40.0" promptText="DD" styleClass="textField" />
+                  <TextField fx:id="expirationMonthTextField11" alignment="CENTER" layoutX="244.0" layoutY="252.0" prefHeight="25.0" prefWidth="40.0" promptText="MM" styleClass="textField" />
+                  <TextField fx:id="expirationMonthTextField111" alignment="CENTER" layoutX="293.0" layoutY="252.0" prefHeight="25.0" prefWidth="40.0" promptText="YY" styleClass="textField" />
+                  <Label layoutX="236.0" layoutY="255.0" text="/" />
+                  <Label layoutX="286.0" layoutY="255.0" text="/" />
                </children>
             </AnchorPane>
             <BorderPane layoutX="241.0" layoutY="196.0" prefHeight="372.0" prefWidth="601.0" visible="false" />
          </children>
       </AnchorPane>
       <FlowPane fx:id="detailPane" alignment="CENTER" onMouseReleased="#closeDetailView" prefHeight="200.0" prefWidth="200.0" styleClass="flowpane_background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="cartPane" layoutX="575.3333333333334" onMouseReleased="#closeShoppingCartPreview" prefHeight="700.0" prefWidth="1015.0" stylesheets="@imat_shoppingCart.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane onMouseReleased="#MouseTrap" prefHeight="700.0" prefWidth="291.0" styleClass="cart_background" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ScrollPane layoutX="24.0" layoutY="116.0" prefHeight="493.0" prefWidth="245.0">
-                     <content>
-                        <FlowPane fx:id="cartFlowPane" alignment="TOP_CENTER" prefHeight="491.0" prefWidth="227.0" styleClass="mylistview" vgap="5.0">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </FlowPane>
-                     </content>
-                  </ScrollPane>
-                  <Button layoutX="91.0" layoutY="654.0" mnemonicParsing="false" onAction="#OpenCheckoutView" prefHeight="32.0" prefWidth="109.0" styleClass="toCheckOut_button" text="Öppna kassan" />
-                  <Button layoutX="95.0" layoutY="14.0" mnemonicParsing="false" styleClass="toCheckOut_button" text="Gamla kvitton" />
-                  <Label alignment="CENTER" layoutX="67.0" layoutY="616.0" prefHeight="17.0" prefWidth="159.0" styleClass="price_label" text="Total: 0kr" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
       <Label layoutX="421.0" layoutY="139.0" prefHeight="17.0" prefWidth="389.0" text="Sökväg till mappen där programmet hämtar och sparar data:" />
       <Label fx:id="pathLabel" alignment="CENTER" layoutX="230.0" layoutY="183.0" prefHeight="17.0" prefWidth="771.0" styleClass="text-sample" text="Label" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" />
       <AnchorPane fx:id="headerMain" minHeight="60.0" prefHeight="93.0" prefWidth="1000.0" styleClass="headerMain" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -97,6 +132,11 @@
                   <Image url="@resources/figma/Property 1=Checkout.png" />
                </image>
             </ImageView>
+            <AnchorPane fx:id="cartNumberPane" layoutX="883.0" layoutY="14.0" prefHeight="27.0" prefWidth="30.0" styleClass="cart_number_background" visible="false" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="14.0">
+               <children>
+                  <Label fx:id="cartNumberLabel" alignment="CENTER" layoutY="1.0" styleClass="cart_number" text="100" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane layoutY="91.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="93.0">
@@ -107,24 +147,16 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="199.0" styleClass="accordionBackground">
                            <children>
-                              <Button fx:id="podButton" layoutX="-2.0" layoutY="-2.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Baljväxter" />
-                              <Button fx:id="berryButton" layoutX="-2.0" layoutY="31.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Bär" />
+                              <Button fx:id="podButton" layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Baljväxter" />
+                              <Button fx:id="berryButton" layoutX="-1.0" layoutY="31.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Bär" />
                               <Button fx:id="vegetableButton" layoutX="-1.0" layoutY="64.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Grönsaker" />
                               <Button fx:id="cabbageButton" layoutX="-1.0" layoutY="97.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Kål" />
                               <Button fx:id="melonButton" layoutX="-1.0" layoutY="130.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Meloner" />
                               <Button fx:id="rootButton" layoutX="-1.0" layoutY="163.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Rotfrukter" />
-                              <Button fx:id="herbButton" layoutX="-2.0" layoutY="196.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Örtkryddor" />
-                              <TitledPane animated="false" expanded="false" layoutX="-2.0" layoutY="229.0" prefHeight="197.0" prefWidth="202.0" styleClass="accordionTitlePane" text="Frukter">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="200.0" styleClass="accordionBackground">
-                                       <children>
-                                          <Button fx:id="exoticButton" layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Exotiska frukter" />
-                                          <Button fx:id="fruitButton" layoutX="-1.0" layoutY="29.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Stenfrukter" />
-                                          <Button fx:id="citrusButton" layoutX="-1.0" layoutY="60.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Citrusfrukter" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </TitledPane>
+                              <Button fx:id="herbButton" layoutX="-1.0" layoutY="196.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Örtkryddor" />
+                              <Button fx:id="exoticButton" layoutX="-1.0" layoutY="295.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Exotiska frukter" />
+                              <Button fx:id="fruitButton" layoutX="-1.0" layoutY="262.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Stenfrukter" />
+                              <Button fx:id="citrusButton" layoutX="-1.0" layoutY="229.0" mnemonicParsing="false" onAction="#categoryButtonPressed" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Citrusfrukter" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -163,16 +195,16 @@
                   </TitledPane>
               </panes>
             </Accordion>
-            <Button layoutX="-1.0" layoutY="572.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="202.0" styleClass="sidebarButton" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-            <Button layoutY="538.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="202.0" styleClass="sidebarButton" text="Button" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutX="-1.0" layoutY="572.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="202.0" styleClass="sidebarButton" text="Knapp 2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutY="538.0" mnemonicParsing="false" onAction="#openReceiptView" prefHeight="34.0" prefWidth="202.0" styleClass="sidebarButton" text="Gamla kvitton" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <Button mnemonicParsing="false" onMouseReleased="#updateItemList" prefHeight="31.0" prefWidth="202.0" styleClass="sidebarButton" text="Alla Produkter" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="219.0" layoutY="142.0" prefHeight="540.0" prefWidth="764.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="218.66666666666663" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="142.0">
          <children>
-            <ScrollPane fitToWidth="true" layoutX="25.0" layoutY="31.0" prefHeight="461.0" prefWidth="755.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fitToWidth="true" layoutX="25.0" layoutY="31.0" prefHeight="461.0" prefWidth="755.0" styleClass="scrollPaneBackground" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <FlowPane fx:id="mainFlowPane" hgap="15.0" prefHeight="537.0" prefWidth="748.0" vgap="15.0">
+                  <FlowPane fx:id="mainFlowPane" hgap="15.0" prefHeight="537.0" prefWidth="748.0" styleClass="scrollPaneBackground" vgap="15.0">
                      <padding>
                         <Insets bottom="15.0" top="15.0" />
                      </padding>

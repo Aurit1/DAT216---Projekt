@@ -12,9 +12,8 @@
             <Image url="@resources/product_2.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="itemName" alignment="CENTER" layoutX="41.0" layoutY="99.0" prefHeight="17.0" prefWidth="89.0" text="Produkt 2" textAlignment="CENTER" />
-      <Label fx:id="itemPrice" layoutX="72.0" layoutY="119.0" text="33kr/st" />
-      <Label fx:id="ItemDiff" layoutX="73.0" layoutY="139.0" text="33kr/kg" />
+      <Label fx:id="itemName" alignment="CENTER" layoutX="14.0" layoutY="103.0" prefHeight="17.0" prefWidth="143.0" styleClass="product_text" text="Produkt 2" textAlignment="CENTER" />
+      <Label fx:id="itemPrice" alignment="CENTER" layoutX="18.0" layoutY="133.0" prefHeight="17.0" prefWidth="136.0" styleClass="product_small_text" text="33kr/st" />
       <AnchorPane layoutX="28.0" layoutY="167.0" maxHeight="33.0" maxWidth="100.0" minHeight="33.0" minWidth="115.0" prefHeight="33.0" prefWidth="100.0">
          <children>
             <ImageView fitHeight="33.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

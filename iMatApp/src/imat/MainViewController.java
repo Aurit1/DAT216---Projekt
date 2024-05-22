@@ -39,6 +39,10 @@ public class MainViewController implements Initializable {
     private FlowPane mainFlowPane;
     @FXML
     private TextField headerSearchBar;
+    @FXML
+    private Label cartNumberLabel;
+    @FXML
+    private AnchorPane cartNumberPane;
 
     @FXML
     private FlowPane cartFlowPane;
@@ -78,6 +82,14 @@ public class MainViewController implements Initializable {
     @FXML
     private FlowPane detailPane;
 
+    @FXML
+    private FlowPane receiptFlowPane;
+    @FXML
+    private AnchorPane receiptViewPane;
+
+    @FXML
+    private Label totCostLabel;
+
     private int quantLabelValue;
     private IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
     private ProductCategory currentProductCategory;
@@ -115,6 +127,8 @@ public class MainViewController implements Initializable {
 
         customer = iMatDataHandler.getCustomer();
         creditCard = iMatDataHandler.getCreditCard();
+
+        //iMatDataHandler.reset();
     }
 
     @FXML
@@ -142,8 +156,6 @@ public class MainViewController implements Initializable {
     @FXML
     private void updateItemList() {
         List<Product> products = iMatDataHandler.getProducts();
-
-        System.out.println("jiodsfhjl");
 
         mainFlowPane.getChildren().clear();
         for(Product product : products){
@@ -234,6 +246,10 @@ public class MainViewController implements Initializable {
         List<ShoppingItem> items = iMatDataHandler.getShoppingCart().getItems();
         cartFlowPane.getChildren().clear();
         cartItemList.clear();
+        if(items.isEmpty()) {
+            System.out.println("hdtr");
+            return;
+        }
 
         for(ShoppingItem item : items) {
             IMatCartItem cartItem = iMatCartItemMap.get(item.getProduct().getName());
@@ -266,11 +282,10 @@ public class MainViewController implements Initializable {
         cartPane.setVisible(false);
         orderButton.setText("Skicka beställning");
 
-
         mainFlowPane.getChildren().clear();
     }
 
-    private void PopulateCheckoutFlowPane() {
+    protected void PopulateCheckoutFlowPane() {
         List<ShoppingItem> items = iMatDataHandler.getShoppingCart().getItems();
         checkoutFlowPane.getChildren().clear();
 
@@ -279,7 +294,6 @@ public class MainViewController implements Initializable {
             checkoutFlowPane.getChildren().add(cartItem);
         }
     }
-
 
     @FXML
     public void OpenProductDetailView(Product product) {
@@ -296,12 +310,8 @@ public class MainViewController implements Initializable {
         detailPane.toBack();
     }
 
-
     @FXML
     public void placeOrder() {
-
-
-
         try {
             customer.setAddress(adressTextField.getText());
             customer.setEmail(mailTextField.getText());
@@ -321,20 +331,24 @@ public class MainViewController implements Initializable {
                 errorLabel.setVisible(false);
                 iMatDataHandler.placeOrder();
 
-                shoppingCart.clear();
-                updateQuantLabels();
                 iMatDataHandler.shutDown();
                 orderButton.setText("Skickat");
                 checkoutFlowPane.getChildren().clear();
+
+
             }
             else {
                 System.out.println("Order is not complete");
             }
         } catch (Exception e) {
+            System.out.println(e);
             errorLabel.setVisible(true);
         }
 
+        updateQuantLabels();
         //orderList.add()
+
+
     }
 
     protected void updateQuantLabels() {
@@ -343,12 +357,43 @@ public class MainViewController implements Initializable {
             item.updateQuantLabel();
         }
         if (!cartItemList.isEmpty()) {
+            System.out.println(cartItemList.size());
             for(IMatCartItem item: cartItemList) {
                 item.updateQuantLabel();
             }
         }
+        //PopulateCheckoutFlowPane();
 
+        int ammountOfItems = shoppingCart.getItems().size();
+        if(ammountOfItems > 0) {
+            ammountOfItems = 0;
+            for(ShoppingItem item: shoppingCart.getItems()) {
+                ammountOfItems += item.getAmount();
+            }
+            cartNumberLabel.setText(Integer.toString(ammountOfItems));
+            cartNumberPane.setVisible(true);
+        }
+        else {
+            cartNumberPane.setVisible(false);
+        }
+        totCostLabel.setText(Double.toString(shoppingCart.getTotal()) + "kr");
     }
 
+    private void updateReceiptFlowPane() {
+        receiptFlowPane.getChildren().clear();
+
+        for(Order order: iMatDataHandler.getOrders()) {
+            receiptFlowPane.getChildren().add(new imat_receipts(order, this));
+        }
+    }
+
+    @FXML
+    public void openReceiptView() {
+        receiptViewPane.toFront();
+        receiptViewPane.setVisible(true);
+        updateReceiptFlowPane();
+
+
+    }
 }
 

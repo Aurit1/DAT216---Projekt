@@ -6,16 +6,17 @@
 }
 .product_title {
     -fx-font-family: "Roboto";
-    -fx-font-size: 25px;
+    -fx-font-size: 27px;
     -fx-font-weight: Bold;
 }
 .detail_text {
     -fx-font-family: "Roboto";
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
+    -fx-font-weight: Bold;
 }
 
 .header_text {
     -fx-font-family: "Roboto";
     -fx-font-weight: Bold;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
 }

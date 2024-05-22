@@ -61,3 +61,18 @@
     -fx-font-weight: Bold;
 }
 
+.remove_item_button {
+
+    -fx-font-size: 12px;
+
+    -fx-background-color: #EF233C;
+    -fx-text-fill: #EDF2F4;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: Bold;
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-style: solid solid solid solid;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #D90429;
+
+}

@@ -1,0 +1,5 @@
+.background{
+    -fx-border-style: solid solid solid solid;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: darkgrey;
+}

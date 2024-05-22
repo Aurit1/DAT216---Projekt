@@ -16,7 +16,7 @@
     -fx-font-size: 18px;
 }
 .accordionBackground {
-     -fx-background-color: #EDF2F4;
+     -fx-background-color: #f8fafb;
  }
 
 .accordion {
@@ -76,6 +76,23 @@
     -fx-background-color: #f8fafb;
 }
 
+.scrollPaneBackground {
+    -fx-background-color: #f8fafb;
+    -fx-border-color: transparent;
+}
+
 .flowpane_background {
     -fx-background-color: rgb(0, 0, 0, 0.4);
+}
+
+.cart_number {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+
+}
+.cart_number_background {
+    -fx-border-radius: 30 30 30 30;
+    -fx-background-radius: 30 30 30 30;
+    -fx-background-color: yellow;
+
 }

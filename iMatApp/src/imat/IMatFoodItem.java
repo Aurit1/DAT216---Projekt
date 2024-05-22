@@ -66,7 +66,7 @@ public class IMatFoodItem extends AnchorPane {
     private void updateItem() {
         itemImage.setImage(IMatDataHandler.getInstance().getFXImage(product));
         itemName.setText(product.getName());
-        itemPrice.setText(Double.toString(product.getPrice()));
+        itemPrice.setText(Double.toString(product.getPrice()) + " " + product.getUnit());
        // itemDiff.setText(product.getUnit()); //ser rätt ut
     }
 
