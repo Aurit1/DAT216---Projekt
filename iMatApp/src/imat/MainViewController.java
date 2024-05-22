@@ -230,14 +230,16 @@ public class MainViewController implements Initializable {
         cartPane.setVisible(true);
     }
 
-    private void updateShoppingCart() {
+    protected void updateShoppingCart() {
         List<ShoppingItem> items = iMatDataHandler.getShoppingCart().getItems();
         cartFlowPane.getChildren().clear();
+        cartItemList.clear();
 
         for(ShoppingItem item : items) {
             IMatCartItem cartItem = iMatCartItemMap.get(item.getProduct().getName());
             cartFlowPane.getChildren().add(cartItem);
             cartItem.updateQuantLabel();
+            cartItemList.add(cartItem);
         }
     }
 
@@ -256,7 +258,8 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    public void OpenCheckoutView() {PopulateCheckoutFlowPane();
+    public void OpenCheckoutView() {
+        PopulateCheckoutFlowPane();
         checkoutAnchorPane.toFront();
         checkoutAnchorPane.setVisible(true);
         cartPane.toBack();
@@ -274,7 +277,6 @@ public class MainViewController implements Initializable {
         for(ShoppingItem item : items) {
             IMatCartItem cartItem = iMatCartItemMap.get(item.getProduct().getName());
             checkoutFlowPane.getChildren().add(cartItem);
-            cartItemList.add(cartItem);
         }
     }
 
@@ -323,6 +325,7 @@ public class MainViewController implements Initializable {
                 updateQuantLabels();
                 iMatDataHandler.shutDown();
                 orderButton.setText("Skickat");
+                checkoutFlowPane.getChildren().clear();
             }
             else {
                 System.out.println("Order is not complete");
@@ -335,14 +338,16 @@ public class MainViewController implements Initializable {
     }
 
     protected void updateQuantLabels() {
-        System.out.println("hahaheheh");
 
         for(IMatFoodItem item: foodItemList) {
             item.updateQuantLabel();
         }
-        for(IMatCartItem item: cartItemList) {
-            item.updateQuantLabel();
+        if (!cartItemList.isEmpty()) {
+            for(IMatCartItem item: cartItemList) {
+                item.updateQuantLabel();
+            }
         }
+
     }
 
 }

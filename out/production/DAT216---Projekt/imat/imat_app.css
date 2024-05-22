@@ -24,25 +24,28 @@
     }
 .accordionTitlePane {
     -fx-font-size: 16px;
-    -fx-font-family: "Arial";
+    -fx-font-family: "Roboto";
     -fx-font-weight: bold;
     -fx-color-label-visible: #EF233C;
+    -fx-text-fill: #f8fafb ;
 
     -fx-border-style: solid solid solid solid;
     -fx-border-width: 0 0 3 0;
     -fx-border-color: #D90429;
 
-    -fx-arrow-side: right;
+
 
 }
 
 .accordionTitlePane > .title {
     -fx-background-color: #EF233C;
     -fx-background-insets: 0;
+
+    -fx-arrow-side: right;
 }
 
 .accordionTitlePane > .title > .arrow-button .arrow {
-    -fx-background-color: grey;
+    -fx-background-color: f8fafb;
 
 }
 
@@ -50,6 +53,7 @@
     -fx-background-color: #D90429;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
+    -fx-text-fill: #f8fafb ;
 
     -fx-font-size: 16px;
     -fx-font-family: "Arial";

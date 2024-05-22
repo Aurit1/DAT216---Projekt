@@ -4,7 +4,9 @@ import imat.MainViewController;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import se.chalmers.cse.dat216.project.IMatDataHandler;
@@ -27,6 +29,12 @@ public class IMatCartItem extends AnchorPane {
     private Label productPrice;
     @FXML
     private Label ammountLabel;
+
+    @FXML
+    private ImageView addButton;
+    @FXML
+    private ImageView subButton;
+
 
     IMatDataHandler iMatDataHandler;
 
@@ -61,14 +69,61 @@ public class IMatCartItem extends AnchorPane {
 
 
     protected void updateQuantLabel(){
-
         List<ShoppingItem> items = parentController.shoppingCart.getItems();
+        if (items.isEmpty()) {
+            parentController.updateShoppingCart();
+        }
         for(ShoppingItem item : items) {
             if(product.getProductId() == item.getProduct().getProductId()) {
                 String ammountText = Integer.toString((int) item.getAmount());
                 ammountLabel.setText(ammountText);
+                return;
             }
         }
+    }
 
+    @FXML
+    public void addButtonPressed() {
+        parentController.shoppingCart.addProduct(product,true);
+        parentController.updateQuantLabels();
+    }
+
+    @FXML
+    public void removeButtonPressed() {
+        var shoppingCart = IMatDataHandler.getInstance().getShoppingCart();
+        var itemOptional = shoppingCart.getItems().stream().filter(x -> x.getProduct().getProductId() == product.getProductId()).findFirst();
+        if (itemOptional.isEmpty())
+            return;
+        var item = itemOptional.get();
+        if ((int)(item.getAmount()) == 1) {
+            shoppingCart.removeItem(item);
+            parentController.updateShoppingCart();
+        }
+        else {
+            item.setAmount(item.getAmount() - 1);
+            shoppingCart.fireShoppingCartChanged(item, false);
+        }
+
+        parentController.updateQuantLabels();
+    }
+
+    @FXML
+    public void addButtonMouseEnter() {
+        addButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/plus_button_hover.png")));
+    }
+
+    @FXML
+    public void addButtonMouseExit() {
+        addButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/plus_button.png")));
+    }
+
+    @FXML
+    public void subButtonMouseEnter() {
+        subButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/minus_button_hover.png")));
+    }
+
+    @FXML
+    public void subButtonMouseExit() {
+        subButton.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/minus_button.png")));
     }
 }
