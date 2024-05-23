@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="145.0" prefWidth="346.0" styleClass="background" stylesheets="@imat_receipt.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="itemImage" fitHeight="168.0" fitWidth="136.0" layoutX="14.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/product_2.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="productLabel" layoutX="172.0" layoutY="24.0" styleClass="product_title" text="Produkt 2" />
+      <Label alignment="CENTER_RIGHT" layoutX="203.0" layoutY="66.0" prefHeight="20.0" prefWidth="60.0" styleClass="amount_text" text="Antal:" />
+      <Label fx:id="amountLabel" layoutX="269.0" layoutY="67.0" styleClass="header_text" text="2000" />
+      <Label layoutX="171.0" layoutY="91.0" prefHeight="20.0" prefWidth="98.0" styleClass="amount_text" text="Total kostnad:" />
+      <Label fx:id="costLabel" layoutX="269.0" layoutY="92.0" styleClass="header_text" text="2000" />
+   </children>
+</fx:root>

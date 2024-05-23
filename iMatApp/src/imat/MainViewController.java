@@ -55,6 +55,11 @@ public class MainViewController implements Initializable {
     private FlowPane checkoutFlowPane;
     @FXML
     private Label errorLabel;
+    @FXML
+    private AnchorPane completedPane;
+    @FXML
+    private ImageView closeIconCheckout;
+
 
     //KASSA
     @FXML
@@ -86,6 +91,20 @@ public class MainViewController implements Initializable {
     private FlowPane receiptFlowPane;
     @FXML
     private AnchorPane receiptViewPane;
+    @FXML
+    private ImageView headerLogo_receipt;
+    @FXML
+    private FlowPane receiptItemFlowPane;
+    @FXML
+    private AnchorPane receiptItemViewPane;
+    @FXML
+    private AnchorPane cartNumberPane1;
+    @FXML
+    private Label cartNumberLabel1;
+
+
+    @FXML
+    private ImageView closeIcon;
 
     @FXML
     private Label totCostLabel;
@@ -128,6 +147,7 @@ public class MainViewController implements Initializable {
         customer = iMatDataHandler.getCustomer();
         creditCard = iMatDataHandler.getCreditCard();
 
+        LoadCustomerDetails();
         //iMatDataHandler.reset();
     }
 
@@ -145,12 +165,14 @@ public class MainViewController implements Initializable {
     public void MouseLogoEnter(){
         headerLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo_hover.png")));
         headerLogo_checkoutView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo_hover.png")));
+        headerLogo_receipt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo_hover.png")));
     }
 
     @FXML
     public void MouseLogoExit(){
         headerLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo.png")));
         headerLogo_checkoutView.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo.png")));
+        headerLogo_receipt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("imat/resources/figma/logo.png")));
     }
 
     @FXML
@@ -247,7 +269,6 @@ public class MainViewController implements Initializable {
         cartFlowPane.getChildren().clear();
         cartItemList.clear();
         if(items.isEmpty()) {
-            System.out.println("hdtr");
             return;
         }
 
@@ -271,6 +292,10 @@ public class MainViewController implements Initializable {
         checkoutAnchorPane.toBack();
         checkoutAnchorPane.setVisible(false);
         checkoutFlowPane.getChildren().clear();
+
+        receiptViewPane.toBack();
+        receiptViewPane.setVisible(false);
+        receiptFlowPane.getChildren().clear();
     }
 
     @FXML
@@ -286,11 +311,12 @@ public class MainViewController implements Initializable {
     }
 
     protected void PopulateCheckoutFlowPane() {
+        System.out.println("Inside PopulateCheckoutFlowPane");
         List<ShoppingItem> items = iMatDataHandler.getShoppingCart().getItems();
         checkoutFlowPane.getChildren().clear();
 
         for(ShoppingItem item : items) {
-            IMatCartItem cartItem = iMatCartItemMap.get(item.getProduct().getName());
+            IMatCartItem cartItem = new IMatCartItem(item.getProduct(), this);
             checkoutFlowPane.getChildren().add(cartItem);
         }
     }
@@ -310,6 +336,21 @@ public class MainViewController implements Initializable {
         detailPane.toBack();
     }
 
+    private void LoadCustomerDetails() {
+        adressTextField.setText(customer.getAddress());
+        mailTextField.setText(customer.getEmail());
+        firstNameTextField.setText(customer.getFirstName());
+        surnameTextField.setText(customer.getLastName());
+        phoneTextField.setText(customer.getPhoneNumber());
+        postalTextField.setText(customer.getPostAddress());
+        adressTextField.setText(customer.getAddress());
+
+        cardTextField.setText(creditCard.getCardNumber());
+        csvTextField.setText(Integer.toString(creditCard.getVerificationCode()));
+        expirationYearTextField.setText(Integer.toString(creditCard.getValidYear()));
+        expirationMonthTextField.setText(Integer.toString(creditCard.getValidMonth()));
+    }
+
     @FXML
     public void placeOrder() {
         try {
@@ -326,6 +367,7 @@ public class MainViewController implements Initializable {
             creditCard.setVerificationCode(Integer.parseInt(csvTextField.getText()));
             creditCard.setValidYear(Integer.parseInt(expirationYearTextField.getText()));
             creditCard.setValidMonth(Integer.parseInt(expirationMonthTextField.getText()));
+
 
             if(iMatDataHandler.isCustomerComplete()) {
                 errorLabel.setVisible(false);
@@ -345,10 +387,11 @@ public class MainViewController implements Initializable {
             errorLabel.setVisible(true);
         }
 
+        updateShoppingCart();
         updateQuantLabels();
         //orderList.add()
 
-
+        completedPane.setVisible(true);
     }
 
     protected void updateQuantLabels() {
@@ -371,10 +414,13 @@ public class MainViewController implements Initializable {
                 ammountOfItems += item.getAmount();
             }
             cartNumberLabel.setText(Integer.toString(ammountOfItems));
+            cartNumberLabel1.setText(Integer.toString(ammountOfItems));
             cartNumberPane.setVisible(true);
+            cartNumberPane1.setVisible(true);
         }
         else {
             cartNumberPane.setVisible(false);
+            cartNumberPane1.setVisible(false);
         }
         totCostLabel.setText(Double.toString(shoppingCart.getTotal()) + "kr");
     }
@@ -394,6 +440,58 @@ public class MainViewController implements Initializable {
         updateReceiptFlowPane();
 
 
+    }
+
+    private void populateReceiptItemFlowPane(Order order) {
+        receiptItemFlowPane.getChildren().clear();
+
+        for (ShoppingItem item: order.getItems()) {
+            receiptItemFlowPane.getChildren().add(new imat_receipt_item(item, this));
+        }
+    }
+
+    @FXML
+    public void openReceiptItemView(Order order) {
+        populateReceiptItemFlowPane(order);
+        receiptItemViewPane.toFront();
+        receiptItemViewPane.setVisible(true);
+    }
+
+    @FXML
+    public void closeReceiptItemView() {
+        receiptItemViewPane.setVisible(false);
+    }
+
+    @FXML
+    public void closeIconMouseEnter() {
+        closeIcon.setImage(new Image(Image.class.getClassLoader().getResourceAsStream("imat/resources/icon_close_hover.png")));
+    }
+
+    @FXML
+    public void closeIconMouseExit() {
+        closeIcon.setImage(new Image(Image.class.getClassLoader().getResourceAsStream("imat/resources/icon_close.png")));
+    }
+
+    @FXML
+    public void checkoutCloseIconMouseEnter() {
+        closeIconCheckout.setImage(new Image(Image.class.getClassLoader().getResourceAsStream("imat/resources/icon_close_hover.png")));
+    }
+
+    @FXML
+    public void checkoutCloseIconMouseExit() {
+        closeIconCheckout.setImage(new Image(Image.class.getClassLoader().getResourceAsStream("imat/resources/icon_close.png")));
+    }
+
+    @FXML
+    public void closeCheckoutPopup() {
+        completedPane.setVisible(false);
+    }
+
+    @FXML
+    public void returnButtonPopup() {
+        completedPane.setVisible(false);
+        checkoutAnchorPane.toBack();
+        checkoutAnchorPane.setVisible(false);
     }
 }
 

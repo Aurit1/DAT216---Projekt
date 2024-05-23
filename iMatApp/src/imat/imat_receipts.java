@@ -5,10 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import se.chalmers.cse.dat216.project.IMatDataHandler;
 import se.chalmers.cse.dat216.project.Order;
+import se.chalmers.cse.dat216.project.ShoppingCart;
 import se.chalmers.cse.dat216.project.ShoppingItem;
 
 import java.io.IOException;
+import java.util.List;
 
 public class imat_receipts extends AnchorPane {
     private MainViewController parentController;
@@ -48,6 +51,22 @@ public class imat_receipts extends AnchorPane {
         }
 
         costLabel.setText(String.valueOf(sum));
+    }
+
+    @FXML
+    public void openReceiptItemViewPane() {
+        parentController.openReceiptItemView(order);
+    }
+
+    @FXML
+    public void addButtonPressed() {
+        ShoppingCart cart = IMatDataHandler.getInstance().getShoppingCart();
+        List<ShoppingItem> items = order.getItems();
+        for (ShoppingItem item : items) {
+            cart.addItem(item);
+        }
+
+        parentController.updateQuantLabels();
     }
 
 }

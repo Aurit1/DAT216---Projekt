@@ -22,7 +22,7 @@
 }
 
 .product_name {
-    -fx-font-size: 17px;
+    -fx-font-size: 20px;
     -fx-font-family: "Roboto";
     -fx-font-weight: Bold;
 }
@@ -30,7 +30,6 @@
 .product_price {
     -fx-font-size: 17px;
     -fx-font-family: "Roboto";
-    -fx-font-weight: bold;
 }
 
 .plusminus_background {
@@ -57,7 +56,7 @@
 
 .price_label {
     -fx-font-family: "Roboto";
-    -fx-font-size: 22;
+    -fx-font-size: 17;
     -fx-font-weight: Bold;
 }
 

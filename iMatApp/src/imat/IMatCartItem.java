@@ -35,6 +35,9 @@ public class IMatCartItem extends AnchorPane {
     @FXML
     private ImageView subButton;
 
+    @FXML
+    private ImageView closeIcon;
+
     IMatDataHandler iMatDataHandler;
 
     public IMatCartItem(Product product, MainViewController mainViewController){
@@ -73,12 +76,10 @@ public class IMatCartItem extends AnchorPane {
         List<ShoppingItem> items = parentController.shoppingCart.getItems();
 
         if (items.isEmpty()) {
-            System.out.println("No shopping cart items found");
             parentController.updateShoppingCart();
             return;
         }
         for(ShoppingItem item : items) {
-            System.out.println(item.getProduct().getName());
             if(product.getProductId() == item.getProduct().getProductId()) {
                 String ammountText = Integer.toString((int) item.getAmount());
                 ammountLabel.setText(ammountText);
@@ -110,6 +111,7 @@ public class IMatCartItem extends AnchorPane {
         }
 
         parentController.updateQuantLabels();
+        parentController.PopulateCheckoutFlowPane();
     }
 
     @FXML
@@ -135,8 +137,19 @@ public class IMatCartItem extends AnchorPane {
     @FXML
     public void removeButton() {
         iMatDataHandler.getShoppingCart().removeProduct(product);
-        parentController.updateQuantLabels();
         parentController.updateShoppingCart();
+        parentController.updateQuantLabels();
+        parentController.PopulateCheckoutFlowPane();
+    }
+
+    @FXML
+    public void closeIconMouseEnter() {
+        closeIcon.setImage(new Image(Image.class.getClassLoader().getResourceAsStream("imat/resources/icon_close_hover.png")));
+    }
+
+    @FXML
+    public void closeIconMouseExit() {
+        closeIcon.setImage(new Image(Image.class.getClassLoader().getResourceAsStream("imat/resources/icon_close.png")));
     }
 
 }

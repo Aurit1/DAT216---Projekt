@@ -129,6 +129,7 @@ public class IMatFoodItem extends AnchorPane {
             shoppingCart.fireShoppingCartChanged(item, false);
         }
 
+        parentController.updateShoppingCart();
         parentController.updateQuantLabels();
 
     }
