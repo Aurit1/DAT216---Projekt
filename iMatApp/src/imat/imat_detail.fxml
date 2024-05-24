@@ -18,12 +18,12 @@
             <Label layoutX="1.0" layoutY="4.0" styleClass="detail_text" text="Märke:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Label layoutY="21.666666666666668" styleClass="detail_text" text="Ursprung:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="21.666666666666668" />
             <Label layoutX="4.0" layoutY="42.0" styleClass="detail_text" text="Innehåll:" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="42.0" />
-            <Label fx:id="brandLabel" layoutX="69.0" layoutY="1.0" text="FogIT" />
-            <Label fx:id="originLabel" layoutX="69.0" layoutY="23.0" text="Danmark" />
-            <Label fx:id="contentLabel" alignment="TOP_LEFT" layoutX="69.0" layoutY="43.0" prefHeight="92.0" prefWidth="288.0" text="Ägg, Nötter, Din mamma" wrapText="true" />
+            <Label fx:id="brandLabel" layoutX="92.0" prefHeight="27.0" prefWidth="162.0" styleClass="normal_text" text="FogIT" />
+            <Label fx:id="originLabel" layoutX="91.0" layoutY="22.0" prefHeight="27.0" prefWidth="200.0" styleClass="normal_text" text="Danmark" />
+            <Label fx:id="contentLabel" alignment="TOP_LEFT" layoutX="92.0" layoutY="42.0" prefHeight="92.0" prefWidth="281.0" styleClass="normal_text" text="Ägg, Nötter, Din mamma" wrapText="true" />
          </children>
       </AnchorPane>
-      <Label fx:id="descriptionField" alignment="TOP_LEFT" layoutX="45.0" layoutY="201.0" prefHeight="104.0" prefWidth="532.0" text="Label" wrapText="true" />
+      <Label fx:id="descriptionField" alignment="TOP_LEFT" layoutX="45.0" layoutY="201.0" prefHeight="104.0" prefWidth="532.0" styleClass="normal_text" text="Label" wrapText="true" />
       <ImageView fx:id="closeIcon" fitHeight="20.0" fitWidth="22.0" layoutX="583.0" layoutY="19.0" onMouseEntered="#closeIconMouseEnter" onMouseExited="#closeIconMouseExit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@resources/icon_close.png" />

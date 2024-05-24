@@ -65,8 +65,6 @@ public class imat_receipts extends AnchorPane {
         for (ShoppingItem item : items) {
             cart.addItem(item);
         }
-
         parentController.updateQuantLabels();
     }
-
 }

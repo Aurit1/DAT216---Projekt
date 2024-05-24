@@ -182,25 +182,6 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="cartPane" layoutX="575.3333333333334" onMouseReleased="#closeShoppingCartPreview" prefHeight="700.0" prefWidth="1015.0" stylesheets="@imat_shoppingCart.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane onMouseReleased="#MouseTrap" prefHeight="700.0" prefWidth="383.0" styleClass="cart_background" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ScrollPane layoutX="26.666666666666664" layoutY="58.66666666666667" prefHeight="554.0" prefWidth="339.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="55.0">
-                     <content>
-                        <FlowPane fx:id="cartFlowPane" alignment="TOP_CENTER" prefHeight="525.0" prefWidth="316.0" styleClass="mylistview" vgap="5.0">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </FlowPane>
-                     </content>
-                  </ScrollPane>
-                  <Button layoutX="143.0" layoutY="654.0" mnemonicParsing="false" onAction="#OpenCheckoutView" prefHeight="32.0" prefWidth="109.0" styleClass="toCheckOut_button" text="Öppna kassan" />
-                  <Label fx:id="totCostLabel" alignment="CENTER" layoutX="113.0" layoutY="615.0" prefHeight="17.0" prefWidth="159.0" styleClass="price_label" text="Total: 0kr" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="receiptViewPane" prefHeight="200.0" prefWidth="200.0" styleClass="anchorBackground" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane fx:id="headerMain2" minHeight="60.0" prefHeight="93.0" prefWidth="1000.0" styleClass="headerMain" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -252,6 +233,30 @@
             <AnchorPane fx:id="cartNumberPane2" layoutX="893.0" layoutY="24.0" prefHeight="27.0" prefWidth="30.0" styleClass="cart_number_background" visible="false">
                <children>
                   <Label fx:id="cartNumberLabel2" alignment="CENTER" layoutY="1.0" styleClass="cart_number" text="100" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cartPane" layoutX="575.3333333333334" onMouseReleased="#closeShoppingCartPreview" prefHeight="700.0" prefWidth="1015.0" stylesheets="@imat_shoppingCart.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane onMouseReleased="#MouseTrap" prefHeight="700.0" prefWidth="383.0" styleClass="cart_background" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ScrollPane layoutX="26.666666666666664" layoutY="58.66666666666667" prefHeight="554.0" prefWidth="339.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="55.0">
+                     <content>
+                        <FlowPane fx:id="cartFlowPane" alignment="TOP_CENTER" prefHeight="525.0" prefWidth="316.0" styleClass="mylistview" vgap="5.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </FlowPane>
+                     </content>
+                  </ScrollPane>
+                  <Button layoutX="143.0" layoutY="654.0" mnemonicParsing="false" onAction="#OpenCheckoutView" prefHeight="32.0" prefWidth="109.0" styleClass="toCheckOut_button" text="Öppna kassan" />
+                  <Label fx:id="totCostLabel" alignment="CENTER" layoutX="113.0" layoutY="615.0" prefHeight="17.0" prefWidth="159.0" styleClass="price_label" text="Total: 0kr" />
+                  <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/icon_close.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>

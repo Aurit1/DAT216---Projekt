@@ -53,5 +53,4 @@ public class imat_receipt_item extends AnchorPane {
         itemImage.setImage(imatDataHandler.getFXImage(shoppingItem.getProduct()));
         costLabel.setText((Double.toString(shoppingItem.getTotal())) + " kr");
     }
-
 }
